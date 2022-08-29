@@ -1,0 +1,18 @@
+#include <cpctelera.h>
+#include <sprites/g_palette.h>
+#include <sprites/my_ship.h>
+#include <sprites/bad_ship.h>
+
+void main(void) {
+   cpct_disableFirmware();
+   cpct_setVideoMode(0);
+   cpct_setPalette(g_palette, 16);
+   cpct_setBorder(HW_BRIGHT_WHITE);
+
+   {
+   u8 *pvmem = cpct_getScreenPtr(CPCT_VMEM_START, 40, 100);
+   cpct_drawSprite(sp_player_ship, pvmem, SP_PLAYER_SHIP_W, SP_PLAYER_SHIP_H);
+   }
+   
+   while (1);
+}
