@@ -42,12 +42,13 @@
 	.area _CODE
 	.area _CODE
 _sp_bullet:
-	.db #0xbe	; 190
-	.db #0xff	; 255
 	.db #0x7d	; 125
 	.db #0x7d	; 125
 	.db #0x7d	; 125
 	.db #0x7d	; 125
-	.db #0x3c	; 60
+	.db #0x7d	; 125
+	.db #0x7d	; 125
+	.db #0x00	; 0
+	.db #0x00	; 0
 	.area _INITIALIZER
 	.area _CABS (ABS)

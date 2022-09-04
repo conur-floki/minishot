@@ -1,13 +1,14 @@
 #include "bullet.h"
 // Data created with Img2CPC - (c) Retroworks - 2007-2017
-// Tile sp_bullet: 3x7 pixels, 1x7 bytes.
-const u8 sp_bullet[1 * 7] = {
-	0xbe,
-	0xff,
+// Tile sp_bullet: 2x8 pixels, 1x8 bytes.
+const u8 sp_bullet[1 * 8] = {
 	0x7d,
 	0x7d,
 	0x7d,
 	0x7d,
-	0x3c,
+	0x7d,
+	0x7d,
+	0x00,
+	0x00
 };
 

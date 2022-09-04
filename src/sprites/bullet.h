@@ -4,7 +4,7 @@
 
 #include <types.h>
 #define SP_BULLET_W 1
-#define SP_BULLET_H 7
-extern const u8 sp_bullet[1 * 7];
+#define SP_BULLET_H 8
+extern const u8 sp_bullet[1 * 8];
 
 #endif

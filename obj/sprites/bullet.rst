@@ -42,12 +42,13 @@
                              42 	.area _CODE
                              43 	.area _CODE
    4000                      44 _sp_bullet:
-   4000 BE                   45 	.db #0xbe	; 190
-   4001 FF                   46 	.db #0xff	; 255
+   4000 7D                   45 	.db #0x7d	; 125
+   4001 7D                   46 	.db #0x7d	; 125
    4002 7D                   47 	.db #0x7d	; 125
    4003 7D                   48 	.db #0x7d	; 125
    4004 7D                   49 	.db #0x7d	; 125
    4005 7D                   50 	.db #0x7d	; 125
-   4006 3C                   51 	.db #0x3c	; 60
-                             52 	.area _INITIALIZER
-                             53 	.area _CABS (ABS)
+   4006 00                   51 	.db #0x00	; 0
+   4007 00                   52 	.db #0x00	; 0
+                             53 	.area _INITIALIZER
+                             54 	.area _CABS (ABS)
