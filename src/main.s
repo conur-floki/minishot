@@ -10,6 +10,8 @@
 .globl cpct_drawSprite_asm
 .globl cpct_drawSolidBox_asm
 .globl cpct_waitVSYNC_asm
+.globl cpct_scanKeyboard_asm
+.globl cpct_isKeyPressed_asm
 .globl _g_palette
 .globl _sp_player_ship
 .globl _sp_enemy_ship
@@ -131,14 +133,13 @@ loop:
     ld a, enemy_x(ix)
     cp #0
     jr z, draw_enemy_at_0
-
         ld c, enemy_x(ix)
         call drawEnemy
         jr draw_enemy_end_if
 
-    draw_enemy_at_0:   
-        ld c, enemy_x(ix)
-        call eraseEnemy
+        draw_enemy_at_0:   
+            ld c, enemy_x(ix)
+            call eraseEnemy
     
     draw_enemy_end_if:
 
@@ -151,28 +152,41 @@ loop:
         cp #0
         jr z, else_draw_bullet_in
 
-            ld b, bullet_y(ix)
-            call drawBullet
-            jr  endif_draw_bullet
+        ld b, bullet_y(ix)
+        call drawBullet
+        jr  endif_draw_bullet
         
-        else_draw_bullet_in:
-            ld b, bullet_y(ix)
-            call eraseBullet
+            else_draw_bullet_in:
+                ld b, bullet_y(ix)
+                call eraseBullet
 
     endif_draw_bullet:
 
-    ld a, bullet_y(ix)
-    cp #0
-    jr z, else_bullet_update
-        ;;ld a, bullet_y(ix) a is already loaded
-        add #BULLET_VY
-        ld bullet_y(ix), a
-        jr endif_bullet_update
+    ld a, bullet_on(ix)
+    cp #FALSE
+    jr z, else_updatebullet_on
+        ld a, bullet_y(ix)
+        cp #0
+        jr z, else_bullet_update
+            ;;ld a, bullet_y(ix) a is already loaded
+            add #BULLET_VY
+            ld bullet_y(ix), a
+            jr endif_bullet_update
 
-    else_bullet_update:
-        ld bullet_y(ix), #BULLET_INIT_Y
+        else_bullet_update:
+            ld bullet_on(ix), #FALSE
+            jr endif_updatebullet_on
 
-    endif_bullet_update:    
+        endif_bullet_update:    
+    
+    else_updatebullet_on:
+        ld hl, #Key_Space
+        call cpct_isKeyPressed_asm
+        jr z, endif_updatebullet_on
+            ld bullet_on(ix), #TRUE
+            ld bullet_y(ix), #BULLET_INIT_Y
+
+    endif_updatebullet_on:
 
     ld a, enemy_x(ix)
     cp #0
@@ -188,6 +202,7 @@ loop:
 
     enemy_is_at_end_if:
     
+    call cpct_scanKeyboard_asm
     call cpct_waitVSYNC_asm
 
     jr loop

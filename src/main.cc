@@ -52,7 +52,7 @@ void main(void)
 {
    u8 enemy_x = ENEMY_INIT_X;
    u8 bullet_y = BULLET_INIT_Y;
-   u8 bullet_on = TRUE;
+   u8 bullet_on = FALSE;
 
    cpct_disableFirmware();
    cpct_setVideoMode(0);
@@ -93,15 +93,27 @@ void main(void)
          enemy_x = enemy_x += ENEMY_VX;
       }
 
-      if (bullet_y == 0)
+      if (bullet_on)
       {
-         bullet_y = BULLET_INIT_Y;
+         if (bullet_y == 0)
+         {
+            bullet_on = FALSE;
+         }
+         else
+         {
+            bullet_y += BULLET_VY;
+         }
       }
       else
       {
-         bullet_y = bullet_y += BULLET_VY;
+         if (cpct_isKeyPressed(Key_Space))
+         {
+            bullet_on = TRUE;
+            bullet_y = BULLET_INIT_Y;
+         }
       }
 
+      cpct_scanKeyboard();
       cpct_waitVSYNC();
    }
 }

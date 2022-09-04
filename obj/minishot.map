@@ -7,7 +7,7 @@ Area                                    Addr        Size        Decimal Bytes (A
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00000000  .__.ABS.                           cpct_video
+     00000000  .__.ABS.                           cpct_keyboard
      00000000  l__CABS                         
      00000000  l__DABS                         
      00000000  l__DATA                         
@@ -18,21 +18,21 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     000003F7  l__CODE                         
+     00000423  l__CODE                         
      00004000  s__CODE                         
-     000043F7  s__DATA                         
-     000043F7  s__GSFINAL                      
-     000043F7  s__GSINIT                       
-     000043F7  s__HOME                         
-     000043F7  s__INITIALIZED                  
-     000043F7  s__INITIALIZER                  
+     00004423  s__DATA                         
+     00004423  s__GSFINAL                      
+     00004423  s__GSINIT                       
+     00004423  s__HOME                         
+     00004423  s__INITIALIZED                  
+     00004423  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    000003F7 =        1015. bytes (REL,CON)
+_CODE                               00004000    00000423 =        1059. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
@@ -40,25 +40,25 @@ _CODE                               00004000    000003F7 =        1015. bytes (R
      00004008  _sp_enemy_ship                     bad_ship
      000040D8  _sp_player_ship                    my_ship
      0000412C  _g_palette                         g_palette
-     0000413C  _drawPlayer                        main
-     00004154  _drawEnemy                         main
-     0000417B  _eraseEnemy                        main
-     0000419A  _drawBullet                        main
-     000041BE  _eraseBullet                       main
-     000041DA  _main                              main
-     0000424B  _cpct_setPalette                   cpct_video
-     00004262  _cpct_setPALColour                 cpct_video
-     0000426E  _cpct_drawSprite                   cpct_sprites
-     00004313  _cpct_waitVSYNC                    cpct_video
-     00004313  cpct_waitVSYNC_asm                 cpct_video
-     0000431B  _cpct_setVideoMode                 cpct_video
-     00004329  _cpct_disableFirmware              cpct_firmware
-     00004329  _cpct_removeInterruptHandler       cpct_firmware
-     00004329  cpct_disableFirmware_asm           cpct_firmware
-     00004329  cpct_removeInterruptHandler_asm    cpct_firmware
-     00004339  _cpct_drawSolidBox                 cpct_sprites
-     000043E0  _cpct_mode_rom_status              cpct_firmware
-     000043E1  _cpct_getScreenPtr                 cpct_video
+     000041A0  _main                              cpct_keyboard
+     00004244  cpct_setPalette_asm                cpct_video
+     00004257  _cpct_isKeyPressed                 cpct_keyboard
+     00004257  cpct_isKeyPressed_asm              cpct_keyboard
+     00004263  cpct_setPALColour_asm              cpct_video
+     0000426D  cpct_drawSprite_asm                cpct_sprites
+     0000430D  _cpct_keyboardStatusBuffer         cpct_keyboard
+     00004317  cpct_setVideoMode_asm              cpct_video
+     00004324  _cpct_waitVSYNC                    cpct_video
+     00004324  cpct_waitVSYNC_asm                 cpct_video
+     0000432C  _cpct_disableFirmware              cpct_firmware
+     0000432C  _cpct_removeInterruptHandler       cpct_firmware
+     0000432C  cpct_disableFirmware_asm           cpct_firmware
+     0000432C  cpct_removeInterruptHandler_asm    cpct_firmware
+     0000433C  cpct_drawSolidBox_asm              cpct_sprites
+     000043DF  _cpct_mode_rom_status              cpct_firmware
+     000043E0  cpct_getScreenPtr_asm              cpct_video
+     000043F2  _cpct_scanKeyboard                 cpct_keyboard
+     000043F2  cpct_scanKeyboard_asm              cpct_keyboard
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 
@@ -68,29 +68,35 @@ obj/sprites/bullet.rel                    [ bullet ]
 obj/sprites/bad_ship.rel                  [ bad_ship ]
 obj/sprites/my_ship.rel                   [ my_ship ]
 obj/sprites/g_palette.rel                 [ g_palette ]
-obj/main.rel                              [ main ]
+obj/main.rel                              [ cpct_keyboard ]
 
 
 Libraries Linked                          [ object file ]
 
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_setPalette_cbindings.rel ]
+                                          [ cpct_setPalette_asmbindings.rel ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_setPALColour_cbindings.rel ]
+                                          [ cpct_isKeyPressed.rel ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_drawSprite_cbindings.rel ]
+                                          [ cpct_setPALColour_asmbindings.re ]
+/home/cpc/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSprite_asmbindings.rel ]
+/home/cpc/cpctelera/cpctelera/cpctelera.lib
+                                          [ keyboard.rel ]
+/home/cpc/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_setVideoMode_asmbindings.re ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_waitVSYNC.rel ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_setVideoMode_cbindings.rel ]
-/home/cpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_drawSolidBox_cbindings.rel ]
+                                          [ cpct_drawSolidBox_asmbindings.re ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
-                                          [ cpct_getScreenPtr_cbindings.rel ]
+                                          [ cpct_getScreenPtr_asmbindings.re ]
+/home/cpc/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_scanKeyboard.rel ]
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 4.
 

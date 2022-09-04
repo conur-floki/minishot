@@ -21,6 +21,8 @@
 	.globl _cpct_setVideoMode
 	.globl _cpct_drawSprite
 	.globl _cpct_drawSolidBox
+	.globl _cpct_isKeyPressed
+	.globl _cpct_scanKeyboard
 	.globl _cpct_disableFirmware
 ;--------------------------------------------------------
 ; special function registers
@@ -175,9 +177,15 @@ _eraseBullet::
 ; Function main
 ; ---------------------------------
 _main::
+	push	ix
+	ld	ix,#0
+	add	ix,sp
+	dec	sp
 ;src/main.c:53: u8 enemy_x = ENEMY_INIT_X;
 ;src/main.c:54: u8 bullet_y = BULLET_INIT_Y;
 	ld	bc,#0x43b2
+;src/main.c:55: u8 bullet_on = FALSE;
+	ld	-1 (ix), #0x00
 ;src/main.c:57: cpct_disableFirmware();
 	push	bc
 	call	_cpct_disableFirmware
@@ -193,7 +201,7 @@ _main::
 	call	_cpct_setPALColour
 	pop	bc
 ;src/main.c:62: while (TRUE)
-00116$:
+00121$:
 ;src/main.c:64: drawPlayer();
 	push	bc
 	call	_drawPlayer
@@ -219,6 +227,10 @@ _main::
 	inc	sp
 	pop	bc
 00103$:
+;src/main.c:75: if (bullet_on)
+	ld	a, -1 (ix)
+	or	a, a
+	jr	Z,00108$
 ;src/main.c:77: if (bullet_y == 0)
 	ld	a, c
 	or	a, a
@@ -255,24 +267,46 @@ _main::
 	add	a, #0xff
 	ld	b, a
 00111$:
-;src/main.c:96: if (bullet_y == 0)
+;src/main.c:96: if (bullet_on)
+	ld	a, -1 (ix)
+	or	a, a
+	jr	Z,00118$
+;src/main.c:98: if (bullet_y == 0)
 	ld	a, c
 	or	a, a
 	jr	NZ,00113$
-;src/main.c:98: bullet_y = BULLET_INIT_Y;
-	ld	c, #0xb2
-	jr	00114$
+;src/main.c:100: bullet_on = FALSE;
+	ld	-1 (ix), #0x00
+	jr	00119$
 00113$:
-;src/main.c:102: bullet_y = bullet_y += BULLET_VY;
+;src/main.c:104: bullet_y += BULLET_VY;
 	ld	a, c
 	add	a, #0xfe
 	ld	c, a
-00114$:
-;src/main.c:105: cpct_waitVSYNC();
+	jr	00119$
+00118$:
+;src/main.c:109: if (cpct_isKeyPressed(Key_Space))
 	push	bc
+	ld	hl, #0x8005
+	call	_cpct_isKeyPressed
+	pop	bc
+	ld	a, l
+	or	a, a
+	jr	Z,00119$
+;src/main.c:111: bullet_on = TRUE;
+	ld	-1 (ix), #0x01
+;src/main.c:112: bullet_y = BULLET_INIT_Y;
+	ld	c, #0xb2
+00119$:
+;src/main.c:116: cpct_scanKeyboard();
+	push	bc
+	call	_cpct_scanKeyboard
 	call	_cpct_waitVSYNC
 	pop	bc
-	jr	00116$
+	jr	00121$
+	inc	sp
+	pop	ix
+	ret
 	.area _CODE
 	.area _INITIALIZER
 	.area _CABS (ABS)
