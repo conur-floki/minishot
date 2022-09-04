@@ -1,0 +1,19 @@
+XL2
+H 9 areas 2 global symbols
+M bullet
+O -mz80
+S .__.ABS. Def0000
+A _CODE size 7 flags 0 addr 0
+S _sp_bullet Def0000
+A _DATA size 0 flags 0 addr 0
+A _INITIALIZED size 0 flags 0 addr 0
+A _DABS size 0 flags 8 addr 0
+A _HOME size 0 flags 0 addr 0
+A _GSINIT size 0 flags 0 addr 0
+A _GSFINAL size 0 flags 0 addr 0
+A _INITIALIZER size 0 flags 0 addr 0
+A _CABS size 0 flags 8 addr 0
+T 00 00
+R 00 00 00 00
+T 00 00 BE FF 7D 7D 7D 7D 3C
+R 00 00 00 00

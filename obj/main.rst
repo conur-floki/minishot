@@ -5003,40 +5003,152 @@ Hexadecimal [16-Bits]
                               8 .globl cpct_setPalette_asm
                               9 .globl cpct_getScreenPtr_asm
                              10 .globl cpct_drawSprite_asm
-                             11 .globl _g_palette
-                             12 .globl _sp_player_ship
-                             13 
-                     0006    14 SP_PLAYER_SHIP_W = 6
-                     000E    15 SP_PLAYER_SHIP_H = 14
-                             16 
-   4124                      17 _main::
-   4124 CD 1C 42      [17]   18     call cpct_disableFirmware_asm
-                             19     
-   4127 0E 00         [ 7]   20     ld c, #0
-   4129 CD 0F 42      [17]   21     call cpct_setVideoMode_asm
-                             22     
-   412C 21 14 41      [10]   23     ld hl, #_g_palette
-   412F 11 10 00      [10]   24     ld de, #16
-   4132 CD 52 41      [17]   25     call cpct_setPalette_asm
-                             26     
-   0011                      27     cpctm_setBorder_asm HW_BLACK
+                             11 .globl cpct_drawSolidBox_asm
+                             12 .globl cpct_waitVSYNC_asm
+                             13 .globl _g_palette
+                             14 .globl _sp_player_ship
+                             15 .globl _sp_enemy_ship
+                             16 .globl _sp_bullet
+                             17 
+                     0006    18 SP_PLAYER_SHIP_W = 6
+                     000E    19 SP_PLAYER_SHIP_H = 14
+                     000D    20 SP_ENEMY_SHIP_W = 13
+                     0010    21 SP_ENEMY_SHIP_H = 16
+                     0001    22 SP_BULLET_W = 1
+                     0007    23 SP_BULLET_H = 7
+                             24 
+                     0000    25 FALSE = 0
+                     0001    26 TRUE = 1 
+                     0025    27 PLAYER_X = 37
+                     00BA    28 PLAYER_Y = 200 - SP_PLAYER_SHIP_H
+                     0043    29 ENEMY_INIT_X = 80 - SP_ENEMY_SHIP_W
+                     000A    30 ENEMY_Y = 10
+                     0000    31 enemy_x = 0
+                     0027    32 BULLET_X = PLAYER_X + 2
+                     00B3    33 BULLET_Y = PLAYER_Y - SP_BULLET_H
+                             34 
+   413B                      35 drawPlayer:
+   413B 11 00 C0      [10]   36     ld de, #CPCT_VMEM_START_ASM
+   413E 0E 25         [ 7]   37     ld c, #PLAYER_X
+   4140 06 BA         [ 7]   38     ld b, #PLAYER_Y
+   4142 CD 68 43      [17]   39     call cpct_getScreenPtr_asm
+                             40    
+   4145 EB            [ 4]   41     ex de, hl
+   4146 21 D7 40      [10]   42     ld hl, #_sp_player_ship
+   4149 06 0E         [ 7]   43     ld b, #SP_PLAYER_SHIP_H
+   414B 0E 06         [ 7]   44     ld c, #SP_PLAYER_SHIP_W
+   414D CD FF 41      [17]   45     call cpct_drawSprite_asm
+                             46 
+   4150 C9            [10]   47     ret
+                             48 
+   4151                      49 drawEnemy:
+   4151 11 00 C0      [10]   50     ld de, #CPCT_VMEM_START_ASM
+   4154 06 0A         [ 7]   51     ld b, #ENEMY_Y
+   4156 CD 68 43      [17]   52     call cpct_getScreenPtr_asm
+                             53    
+   4159 EB            [ 4]   54     ex de, hl
+   415A 21 07 40      [10]   55     ld hl, #_sp_enemy_ship
+   415D 06 10         [ 7]   56     ld b, #SP_ENEMY_SHIP_H
+   415F 0E 0D         [ 7]   57     ld c, #SP_ENEMY_SHIP_W
+   4161 CD FF 41      [17]   58     call cpct_drawSprite_asm
+                             59 
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 96.
+Hexadecimal [16-Bits]
+
+
+
+   4164 C9            [10]   60     ret
+                             61 
+   4165                      62 eraseEnemy:
+   4165 11 00 C0      [10]   63     ld de, #CPCT_VMEM_START_ASM
+   4168 06 0A         [ 7]   64     ld b, #ENEMY_Y
+   416A CD 68 43      [17]   65     call cpct_getScreenPtr_asm
+                             66    
+   416D EB            [ 4]   67     ex de, hl
+   416E 3E 00         [ 7]   68     ld a, #0
+   4170 06 10         [ 7]   69     ld b, #SP_ENEMY_SHIP_H
+   4172 0E 0D         [ 7]   70     ld c, #SP_ENEMY_SHIP_W
+   4174 CD C4 42      [17]   71     call cpct_drawSolidBox_asm
+                             72 
+   4177 C9            [10]   73     ret    
+                             74 
+   4178                      75 drawBullet:
+   4178 11 00 C0      [10]   76     ld de, #CPCT_VMEM_START_ASM
+   417B 0E 27         [ 7]   77     ld c, #BULLET_X
+   417D 06 B3         [ 7]   78     ld b, #BULLET_Y
+   417F CD 68 43      [17]   79     call cpct_getScreenPtr_asm
+                             80    
+   4182 EB            [ 4]   81     ex de, hl
+   4183 21 00 40      [10]   82     ld hl, #_sp_bullet
+   4186 06 07         [ 7]   83     ld b, #SP_BULLET_H
+   4188 0E 01         [ 7]   84     ld c, #SP_BULLET_W
+   418A CD FF 41      [17]   85     call cpct_drawSprite_asm
+                             86 
+   418D C9            [10]   87     ret
+                             88 
+                             89 
+   418E                      90 _main::
+   418E DD 21 FF FF   [14]   91     ld ix, #-1
+   4192 DD 39         [15]   92     add ix, sp
+   4194 DD F9         [10]   93     ld sp, ix
+                             94 
+   4196 DD 36 00 43   [19]   95     ld enemy_x(ix), #ENEMY_INIT_X
+                             96 
+   419A CD B4 42      [17]   97     call cpct_disableFirmware_asm
+                             98     
+   419D 0E 00         [ 7]   99     ld c, #0
+   419F CD 9F 42      [17]  100     call cpct_setVideoMode_asm
+                            101     
+   41A2 21 2B 41      [10]  102     ld hl, #_g_palette
+   41A5 11 10 00      [10]  103     ld de, #16
+   41A8 CD E2 41      [17]  104     call cpct_setPalette_asm
+   0070                     105     cpctm_setBorder_asm HW_BLACK
                               1    .radix h
-   0011                       2    cpctm_setBorder_raw_asm \HW_BLACK ;; [28] Macro that does the job, but requires a number value to be passed
+   0070                       2    cpctm_setBorder_raw_asm \HW_BLACK ;; [28] Macro that does the job, but requires a number value to be passed
                               1    .globl cpct_setPALColour_asm
-   4135 21 10 14      [10]    2    ld   hl, #0x1410         ;; [3]  H=Hardware value of desired colour, L=Border INK (16)
-   4138 CD 65 41      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
+   41AB 21 10 14      [10]    2    ld   hl, #0x1410         ;; [3]  H=Hardware value of desired colour, L=Border INK (16)
+   41AE CD F5 41      [17]    3    call cpct_setPALColour_asm  ;; [25] Set Palette colour of the border
                               3    .radix d
-                             28     
-   413B 11 00 C0      [10]   29     ld de, #CPCT_VMEM_START_ASM
-   413E 06 64         [ 7]   30     ld b, #100
-   4140 0E 28         [ 7]   31     ld c, #40
-   4142 CD 2D 42      [17]   32     call cpct_getScreenPtr_asm
-                             33    
-   4145 EB            [ 4]   34     ex de, hl
-   4146 21 C0 40      [10]   35     ld hl, #_sp_player_ship
-   4149 06 0E         [ 7]   36     ld b, #SP_PLAYER_SHIP_H
-   414B 0E 06         [ 7]   37     ld c, #SP_PLAYER_SHIP_W
-   414D CD 6F 41      [17]   38     call cpct_drawSprite_asm
-                             39 
-   4150                      40 loop:
-   4150 18 FE         [12]   41     jr loop
+                            106     
+   41B1                     107 loop:
+   41B1 CD 3B 41      [17]  108     call drawPlayer
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 97.
+Hexadecimal [16-Bits]
+
+
+
+                            109 
+   41B4 DD 7E 00      [19]  110     ld a, enemy_x(ix)
+   41B7 FE 00         [ 7]  111     cp #0
+   41B9 28 08         [12]  112     jr z, draw_enemy_at_0
+                            113 
+                            114         ;; draw_enemy_not_at_0
+   41BB DD 4E 00      [19]  115         ld c, enemy_x(ix)
+   41BE CD 51 41      [17]  116         call drawEnemy
+   41C1 18 06         [12]  117         jr draw_enemy_end_if
+                            118 
+   41C3                     119     draw_enemy_at_0:   
+   41C3 DD 4E 00      [19]  120         ld c, enemy_x(ix)
+   41C6 CD 65 41      [17]  121         call eraseEnemy
+                            122     
+   41C9                     123     draw_enemy_end_if:
+                            124 
+   41C9 CD 78 41      [17]  125     call drawBullet
+                            126 
+   41CC DD 7E 00      [19]  127     ld a, enemy_x(ix)
+   41CF FE 00         [ 7]  128     cp #0
+   41D1 28 06         [12]  129     jr z, enemy_is_at_0
+                            130         ;; enemy_x != 0
+   41D3 3D            [ 4]  131         dec a
+   41D4 DD 77 00      [19]  132         ld enemy_x(ix), a
+   41D7 18 04         [12]  133         jr enemy_is_at_end_if
+                            134 
+                            135     ;; enemy_x != 0
+   41D9                     136     enemy_is_at_0:
+   41D9 DD 36 00 43   [19]  137         ld enemy_x(ix), #ENEMY_INIT_X
+                            138 
+   41DD                     139     enemy_is_at_end_if:
+                            140     
+   41DD CD AC 42      [17]  141     call cpct_waitVSYNC_asm
+                            142 
+   41E0 18 CF         [12]  143     jr loop

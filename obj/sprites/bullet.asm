@@ -2,13 +2,13 @@
 ; File Created by SDCC : free open source ANSI-C Compiler
 ; Version 3.6.8 #9946 (Linux)
 ;--------------------------------------------------------
-	.module my_ship
+	.module bullet
 	.optsdcc -mz80
 	
 ;--------------------------------------------------------
 ; Public variables in this module
 ;--------------------------------------------------------
-	.globl _sp_player_ship
+	.globl _sp_bullet
 ;--------------------------------------------------------
 ; special function registers
 ;--------------------------------------------------------
@@ -41,90 +41,13 @@
 ;--------------------------------------------------------
 	.area _CODE
 	.area _CODE
-_sp_player_ship:
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x40	; 64
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x90	; 144
-	.db #0x60	; 96
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0xd5	; 213
-	.db #0xea	; 234
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0xd5	; 213
-	.db #0xea	; 234
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x40	; 64
-	.db #0x00	; 0
-	.db #0xc0	; 192
-	.db #0xc0	; 192
-	.db #0x00	; 0
-	.db #0x80	; 128
-	.db #0x90	; 144
-	.db #0x80	; 128
-	.db #0xd5	; 213
-	.db #0x68	; 104	'h'
-	.db #0x40	; 64
-	.db #0x60	; 96
-	.db #0xd5	; 213
-	.db #0x80	; 128
-	.db #0x94	; 148
-	.db #0x68	; 104	'h'
-	.db #0x40	; 64
-	.db #0xea	; 234
-	.db #0x85	; 133
-	.db #0xea	; 234
-	.db #0xea	; 234
-	.db #0xd5	; 213
-	.db #0xd5	; 213
-	.db #0x4a	; 74	'J'
-	.db #0x40	; 64
-	.db #0x5f	; 95
+_sp_bullet:
+	.db #0xbe	; 190
 	.db #0xff	; 255
-	.db #0xff	; 255
-	.db #0xaf	; 175
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0x85	; 133
-	.db #0xff	; 255
-	.db #0xff	; 255
-	.db #0x4a	; 74	'J'
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x40	; 64
-	.db #0x4a	; 74	'J'
-	.db #0x85	; 133
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0xc0	; 192
-	.db #0xc0	; 192
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0x40	; 64
-	.db #0x5f	; 95
-	.db #0xaf	; 175
-	.db #0x80	; 128
-	.db #0x00	; 0
-	.db #0x00	; 0
-	.db #0xc0	; 192
-	.db #0xc0	; 192
-	.db #0xc0	; 192
-	.db #0xc0	; 192
-	.db #0x00	; 0
+	.db #0x7d	; 125
+	.db #0x7d	; 125
+	.db #0x7d	; 125
+	.db #0x7d	; 125
+	.db #0x3c	; 60
 	.area _INITIALIZER
 	.area _CABS (ABS)

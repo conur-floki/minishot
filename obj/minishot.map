@@ -18,43 +18,47 @@ Area                                    Addr        Size        Decimal Bytes (A
      00000000  l__INITIALIZER                  
      00000000  s__CABS                         
      00000000  s__DABS                         
-     0000023F  l__CODE                         
+     0000037A  l__CODE                         
      00004000  s__CODE                         
-     0000423F  s__DATA                         
-     0000423F  s__GSFINAL                      
-     0000423F  s__GSINIT                       
-     0000423F  s__HOME                         
-     0000423F  s__INITIALIZED                  
-     0000423F  s__INITIALIZER                  
+     0000437A  s__DATA                         
+     0000437A  s__GSFINAL                      
+     0000437A  s__GSINIT                       
+     0000437A  s__HOME                         
+     0000437A  s__INITIALIZED                  
+     0000437A  s__INITIALIZER                  
 
 ASxxxx Linker V03.00 + NoICE + sdld,  page 2.
 Hexadecimal  [32-Bits]
 
 Area                                    Addr        Size        Decimal Bytes (Attributes)
 --------------------------------        ----        ----        ------- ----- ------------
-_CODE                               00004000    0000023F =         575. bytes (REL,CON)
+_CODE                               00004000    0000037A =         890. bytes (REL,CON)
 
       Value  Global                              Global Defined In Module
       -----  --------------------------------   ------------------------
-     00004000  _sp_enemy_ship                     bad_ship
-     000040C0  _sp_player_ship                    my_ship
-     00004114  _g_palette                         g_palette
-     00004124  _main                              cpct_keyboard
-     00004152  cpct_setPalette_asm                cpct_video
-     00004165  cpct_setPALColour_asm              cpct_video
-     0000416F  cpct_drawSprite_asm                cpct_sprites
-     0000420F  cpct_setVideoMode_asm              cpct_video
-     0000421C  _cpct_disableFirmware              cpct_firmware
-     0000421C  _cpct_removeInterruptHandler       cpct_firmware
-     0000421C  cpct_disableFirmware_asm           cpct_firmware
-     0000421C  cpct_removeInterruptHandler_asm    cpct_firmware
-     0000422C  _cpct_mode_rom_status              cpct_firmware
-     0000422D  cpct_getScreenPtr_asm              cpct_video
-
+     00004000  _sp_bullet                         bullet
+     00004007  _sp_enemy_ship                     bad_ship
+     000040D7  _sp_player_ship                    my_ship
+     0000412B  _g_palette                         g_palette
+     0000418E  _main                              cpct_keyboard
+     000041E2  cpct_setPalette_asm                cpct_video
+     000041F5  cpct_setPALColour_asm              cpct_video
+     000041FF  cpct_drawSprite_asm                cpct_sprites
+     0000429F  cpct_setVideoMode_asm              cpct_video
+     000042AC  _cpct_waitVSYNC                    cpct_video
+     000042AC  cpct_waitVSYNC_asm                 cpct_video
+     000042B4  _cpct_disableFirmware              cpct_firmware
+     000042B4  _cpct_removeInterruptHandler       cpct_firmware
+     000042B4  cpct_disableFirmware_asm           cpct_firmware
+     000042B4  cpct_removeInterruptHandler_asm    cpct_firmware
+     000042C4  cpct_drawSolidBox_asm              cpct_sprites
+     00004367  _cpct_mode_rom_status              cpct_firmware
+     00004368  cpct_getScreenPtr_asm              cpct_video
 ASxxxx Linker V03.00 + NoICE + sdld,  page 3.
 
 Files Linked                              [ module(s) ]
 
+obj/sprites/bullet.rel                    [ bullet ]
 obj/sprites/bad_ship.rel                  [ bad_ship ]
 obj/sprites/my_ship.rel                   [ my_ship ]
 obj/sprites/g_palette.rel                 [ g_palette ]
@@ -72,7 +76,11 @@ Libraries Linked                          [ object file ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_setVideoMode_asmbindings.re ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_waitVSYNC.rel ]
+/home/cpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpct_removeInterruptHandler.rel ]
+/home/cpc/cpctelera/cpctelera/cpctelera.lib
+                                          [ cpct_drawSolidBox_asmbindings.re ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib
                                           [ cpc_mode_rom_status.rel ]
 /home/cpc/cpctelera/cpctelera/cpctelera.lib

@@ -42,32 +42,34 @@
 	.area _CODE
 	.area _CODE
 _sp_enemy_ship:
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
 	.db #0xc0	; 192
 	.db #0xc0	; 192
 	.db #0xc0	; 192
 	.db #0xc0	; 192
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x48	; 72	'H'
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x40	; 64
 	.db #0xc0	; 192
 	.db #0xe0	; 224
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xd0	; 208
 	.db #0xc0	; 192
-	.db #0x84	; 132
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x48	; 72	'H'
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x40	; 64
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xc0	; 192
@@ -76,9 +78,10 @@ _sp_enemy_ship:
 	.db #0xc0	; 192
 	.db #0xf0	; 240
 	.db #0xe0	; 224
-	.db #0x84	; 132
-	.db #0x0c	; 12
-	.db #0x0c	; 12
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -89,8 +92,9 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xe0	; 224
-	.db #0x0c	; 12
-	.db #0x48	; 72	'H'
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x40	; 64
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -101,7 +105,8 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xf0	; 240
-	.db #0x84	; 132
+	.db #0x80	; 128
+	.db #0x00	; 0
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -114,6 +119,7 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xe0	; 224
+	.db #0x00	; 0
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -126,6 +132,7 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xe0	; 224
+	.db #0x00	; 0
 	.db #0xc0	; 192
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -138,6 +145,7 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xc0	; 192
+	.db #0x00	; 0
 	.db #0xd0	; 208
 	.db #0xd0	; 208
 	.db #0xf0	; 240
@@ -150,6 +158,7 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xe0	; 224
 	.db #0xe0	; 224
+	.db #0x00	; 0
 	.db #0xd0	; 208
 	.db #0xe0	; 224
 	.db #0xd0	; 208
@@ -162,6 +171,7 @@ _sp_enemy_ship:
 	.db #0xe0	; 224
 	.db #0xd0	; 208
 	.db #0xe0	; 224
+	.db #0x00	; 0
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xe0	; 224
@@ -174,7 +184,8 @@ _sp_enemy_ship:
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xe0	; 224
-	.db #0x48	; 72	'H'
+	.db #0x00	; 0
+	.db #0x40	; 64
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -185,8 +196,9 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xf0	; 240
-	.db #0x84	; 132
-	.db #0x0c	; 12
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x00	; 0
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -197,9 +209,10 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xe0	; 224
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x48	; 72	'H'
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x40	; 64
 	.db #0xd0	; 208
 	.db #0xf0	; 240
 	.db #0xf0	; 240
@@ -208,31 +221,34 @@ _sp_enemy_ship:
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xe0	; 224
-	.db #0x84	; 132
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x48	; 72	'H'
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x40	; 64
 	.db #0xc0	; 192
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xf0	; 240
 	.db #0xc0	; 192
-	.db #0x84	; 132
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
+	.db #0x80	; 128
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
 	.db #0xc0	; 192
 	.db #0xc0	; 192
 	.db #0xc0	; 192
 	.db #0xc0	; 192
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
-	.db #0x0c	; 12
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
+	.db #0x00	; 0
 	.area _INITIALIZER
 	.area _CABS (ABS)
